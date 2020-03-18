@@ -6,7 +6,7 @@ const dataDir = path.join(__dirname, "data");
 // initialise a database connection
 const sequelize = new Sequelize("libraryDB", null, null, {
     dialect: "sqlite",
-    storage: "/data/library.sqlite"
+    storage: "data/library.sqlite"
 });
 
 // connect to the database
