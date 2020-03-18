@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>University of PontyBridge : Library System</title>
+        <link rel="stylesheet" href="/css/style.css">
+        <link href="https://fonts.googleapis.com/css?family=Quattrocento+Sans&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Quattrocento&display=swap" rel="stylesheet">
+        <script defer src="/js/layout.js"></script>
+        <script src="/js/datetime.js"></script>
+        <script src="/js/transaction.js"></script>
+        <script src="/js/jquery-3.4.1.js"></script>
+    </head>
+    <body>
+        <header>
+        </header>
+        <div class="all-content">
+            <div class="system-message hidden" id="alert-box">  <!-- Area for Display System Message, like success or error notification -->
+                <div></div>
+            </div>
+            <div class="system-message greetings">              <!-- Topic of the page -->
+                <div class="welcome">All Users</div>
+            </div>
+            <div class="search-bar">                            <!-- Search Area -->
+                <div class="search-label"><label for="searchType">Search by</label></div>
+                <div class="search-select">
+                    <select name="searchType" id="searchType" onchange="searchUsers('all-users-list')">
+                        <option value="name">Name</option>
+                        <option value="barcode">Barcode</option>
+                    </select>
+                    <label for="searchMethod" class="hidden">Search Method</label>
+                    <select name="searchMethod" id="searchMethod" onchange="searchUsers('all-users-list')">
+                        <option value="anyParts">Contains</option>
+                        <option value="startsWith">Starts With</option>
+                    </select>
+                </div>
+                <div class="search-box"><input type="search" id="search-users-box" oninput="searchUsers('all-users-list')"></div>
+            </div>
+            <div class="list">                                  <!-- Table for user list display -->
+                <table class="users-list" id="all-users-list">
+                    <thead>
+                        <tr>
+                            <td class="id">ID</td>
+                            <td class="name">Name</td>
+                            <td class="barcode">Barcode</td>
+                            <td class="memberType">Member Type</td>
+                            <td class="createdAt">Created</td>
+                            <td class="updatedAt">Updated</td>
+                            <td class="edit">Update<br/>data?</td>
+                            <td class="delete">Remove?</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <script>getAllUsers('all-users-list')</script>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <footer class="topic uni-name-footer">
+            <a href="/">University of PontyBridge Library System</a>
+        </footer>
+        <div id="modal-delete-user" class="modal">                  <!-- Modal for confirmation of deleting a user permanently -->
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('modal-delete-user')">&times;</span>    <!-- 'X' close button -->
+                <form class="simple-form" id="form-user-delete" method="POST" action="">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <div class="label modal-label-text modal-header form-item-left-to-right form-item-1">
+                        <div>Do you confirm to delete this user?</div>
+                        <div class="minor">(Loan(s) by this user will also be deleted!)</div>
+                    </div>
+                    <div class="label modal-label-text form-item-left form-item-2" id="id-label">ID</div>
+                    <div class="value form-item-center-to-right form-item-2" id="id-value"></div>
+                    <div class="label modal-label-text form-item-left form-item-3" id="name-label">Name</div>
+                    <div class="value form-item-center-to-right form-item-3" id="name-value"></div>
+                    <div class="label modal-label-text form-item-left form-item-4" id="barcode-label">Barcode</div>
+                    <div class="value form-item-center-to-right form-item-4" id="barcode-value"></div>
+                    <div class="label modal-label-text form-item-left form-item-5" id="memberType-label">Member Type</div>
+                    <div class="value form-item-center-to-right form-item-5" id="memberType-value"></div>
+                    <div class="form-item-center-to-right form-item-6">
+                        <input type="submit" value="Confirm" id="submit-delete" />
+                        <input type="button" onclick="closeModal('modal-delete-user')" value="Cancel" id="cancel-delete" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

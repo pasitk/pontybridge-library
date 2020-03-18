@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>University of PontyBridge : Library System</title>
+        <link rel="stylesheet" href="/css/style.css">
+        <link href="https://fonts.googleapis.com/css?family=Quattrocento+Sans&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Quattrocento&display=swap" rel="stylesheet">
+        <script defer src="/js/layout.js"></script>
+        <script src="/js/datetime.js"></script>
+        <script src="/js/transaction.js"></script>
+        <script src="/js/jquery-3.4.1.js"></script>
+    </head>
+    <body>
+        <header>
+        </header>
+        <div class="all-content">
+            <div class="system-message hidden" id="alert-box">  <!-- Area for Display System Message, like success or error notification -->
+                <div></div>
+            </div>
+            <div class="system-message greetings">              <!-- Topic of the page -->
+                <div class="welcome">All Books</div>
+            </div>
+            <div class="search-bar">                            <!-- Search Area -->
+                <div class="search-label"><label for="searchType">Search by</label></div>
+                <div class="search-select">
+                    <select name="searchType" id="searchType" onchange="searchBooks('all-books-list')">
+                        <option value="title">Title</option>
+                        <option value="isbn">ISBN</option>
+                        <option value="author">Author</option>
+                    </select>
+                    <label for="searchMethod" class="hidden">Search Method</label>
+                    <select name="searchMethod" id="searchMethod" onchange="searchBooks('all-books-list')">
+                        <option value="anyParts">Contains</option>
+                        <option value="startsWith">Starts With</option>
+                    </select>
+                </div>
+                <div class="search-box"><input type="search" id="search-books-box" oninput="searchBooks('all-books-list')"></div>
+            </div>
+            <div class="list">                                  <!-- Table for book list display -->
+                <table class="book-list" id="all-books-list">
+                    <thead>
+                        <tr>
+                            <td class="id">ID</td>
+                            <td class="name">Title</td>
+                            <td class="barcode">ISBN</td>
+                            <td class="memberType">No. of Copies</td>
+                            <td class="createdAt">Created</td>
+                            <td class="updatedAt">Updated</td>
+                            <td class="authors">Author(s)</td>
+                            <td class="edit">Update<br/>data?</td>
+                            <td class="delete">Remove?</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <script>getAllBooksWithAuthors('all-books-list')</script>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <footer class="topic uni-name-footer">
+            <a href="/">University of PontyBridge Library System</a>
+        </footer>
+        <div id="modal-delete-book" class="modal">                  <!-- Modal for confirmation of deleting a book permanently -->
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('modal-delete-book')">&times;</span>    <!-- 'X' close button -->
+                <form class="simple-form" id="form-book-delete" method="POST" action="">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <div class="label modal-label-text modal-header form-item-left-to-right form-item-1">
+                        <div>Do you confirm to delete this book?</div>
+                        <div class="minor">(Loan(s) of this book's copies will also be deleted!)</div>
+                    </div>
+                    <div class="label modal-label-text form-item-left form-item-2" id="id-label">ID</div>
+                    <div class="value form-item-center-to-right form-item-2" id="id-value"></div>
+                    <div class="label modal-label-text form-item-left form-item-3" id="title-label">Title</div>
+                    <div class="value form-item-center-to-right form-item-3" id="title-value"></div>
+                    <div class="label modal-label-text form-item-left form-item-4" id="isbn-label">ISBN</div>
+                    <div class="value form-item-center-to-right form-item-4" id="isbn-value"></div>
+                    <div class="label modal-label-text form-item-left form-item-5" id="authors-label">Authors</div>
+                    <div class="value form-item-center-to-right form-item-5" id="authors-value"></div>
+                    <div class="label modal-label-text form-item-left form-item-6" id="noOfCopies-label">No. of Copies</div>
+                    <div class="value form-item-center-to-right form-item-6" id="noOfCopies-value"></div>
+                    <div class="form-item-center-to-right form-item-7">
+                        <input type="submit" value="Confirm" id="submit-delete" />
+                        <input type="button" onclick="closeModal('modal-delete-book')" value="Cancel" id="cancel-delete" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>University of PontyBridge : Library System</title>
+        <link rel="stylesheet" href="/css/style.css">
+        <link rel="stylesheet" href="/css/jquery-ui.css">
+        <link href="https://fonts.googleapis.com/css?family=Quattrocento+Sans&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Quattrocento&display=swap" rel="stylesheet">
+        <script defer src="/js/layout.js"></script>
+        <script src="/js/transaction.js"></script>
+        <script src="/js/jquery-3.4.1.js"></script>
+        <script src="/js/jquery-ui.js"></script>
+    </head>
+    <body>
+        <header>
+        </header>
+        <div class="all-content">
+            <div class="system-message hidden" id="alert-box">  <!-- Area for Display System Message, like success or error notification -->
+                <div></div>
+            </div>
+            <div class="system-message greetings">              <!-- Topic and instruction to interact with the page -->
+                <div class="welcome">Make a loan to user / Extend due date of a loan</div>
+                <div class="instruction">Please insert a user barcode, an ISBN number, and the due date (for a new loan or to replace old due date)</div>
+            </div>
+            <div class="transaction">                           <!-- Form div : Making a new loan to user -->
+                <form class="simple-form" id="form-loans-add" method="POST" action="/users//loans/">
+                    <label for="barcode" class="form-item-left form-item-1">User's Barcode</label>
+                    <input type="number" name="barcode" id="barcode" class="form-item-center-to-right form-item-1" oninput="getUserByBarcode(this.value)" required />
+                    <div class="description-message form-item-2 form-item-center-to-right" id="barcode-validate"></div>
+                    <label for="isbn" class="form-item-left form-item-3">ISBN</label>
+                    <input type="number" name="isbn" id="isbn" class="form-item-center-to-right form-item-3" oninput="getBookByIsbn(this.value)" required />
+                    <div class="description-message form-item-4 form-item-center-to-right" id="isbn-validate"></div>
+                    <label for="dueDate" class="form-item-left form-item-5">Due Date</label>
+                    <input type="date" name="dueDate" id="dueDate" size="50" class="form-item-center form-item-5" onchange="isValidDueDate(this.value)" required />
+                    <div class="validation-message form-item-5 form-item-right" id="date-validate"></div>
+                    <div class="description-message form-item-6 form-item-center-to-right success-text" id="ready-alert">A copy of this book is ready to loan.</div>
+                    <div class="description-message form-item-6 form-item-center-to-right warning-text" id="loaned-alert">This book has loaned by this user. If you click 'submit', system will replace old due date with the new in this form.</div>
+                    <div class="description-message form-item-6 form-item-center-to-right fail-text" id="out-of-copies-alert">Sorry, There is no copy of this book left.</div>
+                    <div class="form-item-center-to-right form-item-7">
+                        <input type="submit" value="Submit" id="submit-loan" />
+                        <input type="reset" value="Clear" id="reset-loan" />
+                        <input type="button" onclick="backToLatestPageBefore()" value="Back" id="back-edit-loan" />
+                    </div>
+                </form>
+            </div>
+            <div class="system-message special-msg">        <!-- Remark message about making a loan -->
+                <div class="remarks">Remarks: One user can lone only 1 copy of a book. If required book has loaned, the due date will be changed to filled due date in the form.</div>
+            </div>
+        </div>
+        <footer class="topic uni-name-footer">
+            <a href="/">University of PontyBridge Library System</a>
+        </footer>
+    </body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>University of PontyBridge : Library System</title>
+        <link rel="stylesheet" href="/css/style.css">
+        <link href="https://fonts.googleapis.com/css?family=Quattrocento+Sans&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Quattrocento&display=swap" rel="stylesheet">
+        <script defer src="/js/layout.js"></script>
+        <script src="/js/datetime.js"></script>
+        <script src="/js/transaction.js"></script>
+        <script src="/js/jquery-3.4.1.js"></script>
+    </head>
+    <body>
+        <header>
+        </header>
+        <div class="all-content">
+            <div class="system-message hidden" id="alert-box">  <!-- Area for Display System Message, like success or error notification -->
+                <div></div>
+            </div>
+            <div class="system-message greetings">              <!-- Topic and instruction to interact with the page -->
+                <div class="welcome">Search book borrowers</div>
+            </div>
+            <div class="search-bar">                            <!-- Search Area -->
+                <div class="search-label"><label for="search-books-box">Book's ISBN</label></div>
+                <div class="search-box search-loan-box"><input type="search" id="search-books-box"></div>
+                <div class="search-select">
+                    <label for="searchType" class="hidden">Search for</label>
+                    <select name="searchType" id="searchType">
+                        <option value="all">All Loan(s) History</option>
+                        <option value="current">Current Loan(s) only</option>
+                    </select>
+                </div>
+                <div class="search-btn"><input type="button" value="Search" name="search" id="search-books-btn" onclick="getBookBorrowerByIsbn('search-result-book-data','all-loans-list')"></div>
+            </div>
+            <div class="search-bar">                            <!-- Area for display book detail from searching -->
+                <div class="search-result" id="search-result-book-data"></div>
+            </div>
+            <div class="list">                                  <!-- Area for display loan list of the book which is searched -->
+                <table class="loan-list" id="all-loans-list">
+                    <thead>
+                        <tr>
+                            <td class="id">Loan ID</td>
+                            <td class="name">Name</td>
+                            <td class="memberType">Type</td>
+                            <td class="barcode">Barcode</td>
+                            <td class="dueDate">Due Date</td>
+                            <td class="createdAt">Loan Date</td>
+                            <td class="returned">Returned or Not</td>
+                            <td class="updatedAt">Loan Updated</td>
+                            <td class="delete">Delete Loan?</td>
+                            <td class="edit">Change Due Date?</td>
+                            <td class="return">Book Return?</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <footer class="topic uni-name-footer">
+            <a href="/">University of PontyBridge Library System</a>
+        </footer>
+        <div id="modal-delete-loan" class="modal">                     <!-- Modal for confirmation of deleting a loan permanently -->
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('modal-delete-loan')">&times;</span>        <!-- 'X' close button -->
+                <form class="simple-form" id="form-loan-delete" method="POST" action="">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <input type="hidden" id="user-data-delete-loan-modal" name="user" value="">
+                    <input type="hidden" id="book-data-delete-loan-modal" name="book" value="">
+                    <input type="hidden" id="barcode-data-delete-loan-modal" name="barcode" value="">
+                    <input type="hidden" id="isbn-data-delete-loan-modal" name="isbn" value="">
+                    <div class="label modal-label-text modal-header form-item-left-to-right form-item-1">
+                        <div>Do you confirm to delete this Loan?</div>
+                        <div class="minor">(This is for loan history deletion. If you want to return a book please close this window and click 'Return' button.)</div>
+                    </div>
+                    <div class="label modal-label-text form-item-left form-item-2" id="delete-loan-id-label">Loan ID</div>
+                    <div class="value form-item-center-to-right form-item-2" id="delete-loan-id-value"></div>
+                    <div class="label modal-label-text form-item-left form-item-3" id="delete-loan-user-data-label">Borrower Name / Type</div>
+                    <div class="value form-item-center-to-right form-item-3" id="delete-loan-user-data-value"></div>
+                    <div class="label modal-label-text form-item-left form-item-4" id="delete-loan-barcode-label">Borrower Barcode</div>
+                    <div class="value form-item-center-to-right form-item-4" id="delete-loan-barcode-value"></div>
+                    <div class="label modal-label-text form-item-left form-item-5" id="delete-loan-title-label">Title</div>
+                    <div class="value form-item-center-to-right form-item-5" id="delete-loan-title-value"></div>
+                    <div class="label modal-label-text form-item-left form-item-6" id="delete-loan-isbn-label">ISBN</div>
+                    <div class="value form-item-center-to-right form-item-6" id="delete-loan-isbn-value"></div>
+                    <div class="label modal-label-text form-item-left form-item-7" id="delete-loan-createdAt-label">Loan Date</div>
+                    <div class="value form-item-center-to-right form-item-7" id="delete-loan-createdAt-value"></div>
+                    <div class="label modal-label-text form-item-left form-item-8" id="delete-loan-dueDate-label">Due Date</div>
+                    <div class="value form-item-center-to-right form-item-8" id="delete-loan-dueDate-value"></div>
+                    <div class="form-item-center-to-right form-item-9">
+                        <input type="submit" value="Confirm" id="submit-delete" />
+                        <input type="button" onclick="closeModal('modal-delete-loan')" value="Cancel" id="cancel-delete" />
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div id="modal-return-loan" class="modal">                      <!-- Modal for confirmation of returning a book in a loan -->
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('modal-return-loan')">&times;</span>        <!-- 'X' close button -->
+                <form class="simple-form" id="form-loan-return" method="POST" action="">
+                    <input type="hidden" name="_method" value="PUT">
+                    <input type="hidden" id="user-data-return-loan-modal" name="user" value="">
+                    <input type="hidden" id="book-data-return-loan-modal" name="book" value="">
+                    <input type="hidden" id="barcode-data-return-loan-modal" name="barcode" value="">
+                    <input type="hidden" id="isbn-data-return-loan-modal" name="isbn" value="">
+                    <div class="label modal-label-text modal-header form-item-left-to-right form-item-1">
+                        <div>Do you confirm to return this book?</div>
+                        <div class="minor">(If you want to delete this loan please close this window and click 'Delete' button.)</div>
+                    </div>
+                    <div class="label modal-label-text form-item-left form-item-2" id="return-loan-id-label">Loan ID</div>
+                    <div class="value form-item-center-to-right form-item-2" id="return-loan-id-value"></div>
+                    <div class="label modal-label-text form-item-left form-item-3" id="return-loan-user-data-label">Borrower Name / Type</div>
+                    <div class="value form-item-center-to-right form-item-3" id="return-loan-user-data-value"></div>
+                    <div class="label modal-label-text form-item-left form-item-4" id="return-loan-barcode-label">Borrower Barcode</div>
+                    <div class="value form-item-center-to-right form-item-4" id="return-loan-barcode-value"></div>
+                    <div class="label modal-label-text form-item-left form-item-5" id="return-loan-title-label">Title</div>
+                    <div class="value form-item-center-to-right form-item-5" id="return-loan-title-value"></div>
+                    <div class="label modal-label-text form-item-left form-item-6" id="return-loan-isbn-label">ISBN</div>
+                    <div class="value form-item-center-to-right form-item-6" id="return-loan-isbn-value"></div>
+                    <div class="label modal-label-text form-item-left form-item-7" id="return-loan-createdAt-label">Loan Date</div>
+                    <div class="value form-item-center-to-right form-item-7" id="return-loan-createdAt-value"></div>
+                    <div class="label modal-label-text form-item-left form-item-8" id="return-loan-dueDate-label">Due Date</div>
+                    <div class="value form-item-center-to-right form-item-8" id="return-loan-dueDate-value"></div>
+                    <div class="form-item-center-to-right form-item-9">
+                        <input type="submit" value="Confirm" id="submit-return" />
+                        <input type="button" onclick="closeModal('modal-return-loan')" value="Cancel" id="cancel-return" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

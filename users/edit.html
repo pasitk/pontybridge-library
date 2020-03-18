@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>University of PontyBridge : Library System</title>
+        <link rel="stylesheet" href="/css/style.css">
+        <link href="https://fonts.googleapis.com/css?family=Quattrocento+Sans&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Quattrocento&display=swap" rel="stylesheet">
+        <script defer src="/js/layout.js"></script>
+        <script src="/js/datetime.js"></script>
+        <script src="/js/transaction.js"></script>
+        <script src="/js/jquery-3.4.1.js"></script>
+    </head>
+    <body>
+        <header>
+        </header>
+        <div class="all-content">
+            <div class="system-message hidden" id="alert-box">  <!-- Area for Display System Message, like success or error notification -->
+                <div></div>
+            </div>
+            <div class="system-message greetings">              <!-- Topic and instruction to interact with the page -->
+                <div class="welcome">Edit user detail</div>
+                <div class="instruction">Please insert a new name and/or select a member type.</div>
+            </div>
+            <div class="transaction">                           <!-- Form div : Editing user detail -->
+                <form class="simple-form" id="form-users-edit" method="POST" action="">
+                    <input type="hidden" name="_method" value="PUT">
+                    <label for="name" class="form-item-left form-item-1">Name</label>
+                    <input type="text" name="name" id="name" size="50" class="form-item-center-to-right form-item-1" required />
+                    <label for="barcode" class="form-item-left form-item-2">Barcode</label>
+                    <input type="text" name="barcode" id="barcode" size="50" class="form-item-center-to-right form-item-2" readonly="readonly" />
+                    <label for="memberType" class="form-item-left form-item-3">Member Type</label>
+                    <select class="form-item-center-to-right form-item-3" name="memberType" id="memberType" required>
+                        <option value="">Select Member Type:</option>
+                        <option value="Staff">Staff</option>
+                        <option value="Student">Student</option>
+                    </select>
+                    <div class="created-and-updated form-item-center-to-right form-item-4">
+                        <div id="created">Created at : </div>
+                        <div id="updated">Updated at : </div>
+                    </div>
+                    <div class="form-item-center-to-right form-item-5">
+                        <input type="submit" value="Save" id="submit-edit" />
+                        <input type="reset" onclick="getUserDetail('form-users-edit',setupEditUserDetailForm,setupEditUserDetailFormErrorCase)" value="Reset" id="reset-edit" />
+                        <input type="button" onclick="backToLatestPageBefore()" value="Back" id="back-edit" />
+                    </div>
+                </form>
+                <script>getUserDetail('form-users-edit',setupEditUserDetailForm,setupEditUserDetailFormErrorCase)</script>  <!-- Script to preload user's current data to be ready for editing and put it into the form -->
+            </div>
+        </div>
+        <footer class="topic uni-name-footer">
+            <a href="/">University of PontyBridge Library System</a>
+        </footer>
+    </body>
+</html>

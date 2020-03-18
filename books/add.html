@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>University of PontyBridge : Library System</title>
+        <link rel="stylesheet" href="/css/style.css">
+        <link href="https://fonts.googleapis.com/css?family=Quattrocento+Sans&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Quattrocento&display=swap" rel="stylesheet">
+        <script defer src="/js/layout.js"></script>
+        <script src="/js/transaction.js"></script>
+        <script src="/js/jquery-3.4.1.js"></script>
+    </head>
+    <body>
+        <header>
+        </header>
+        <div class="all-content">
+            <div class="system-message hidden" id="alert-box">  <!-- Area for Display System Message, like success or error notification -->
+                <div></div>
+            </div>
+            <div class="system-message greetings">              <!-- Topic and instruction to interact with the page -->
+                <div class="welcome">Add a new book</div>
+                <div class="instruction">Please insert a title, an ISBN number, number of copies, and select author(s)</div>
+            </div>
+            <div class="transaction">                           <!-- Form div : Adding a new book -->
+                <form class="simple-form" id="form-books-add" method="POST" action="/books">
+                    <input type="hidden" name="oldIsbn" id="oldIsbn" value="">
+                    <label for="title" class="form-item-left form-item-1">Title</label>
+                    <input type="text" name="title" id="title" size="50" class="form-item-center-to-right form-item-1" required />
+                    <label for="isbn" class="form-item-left form-item-2">ISBN</label>
+                    <input type="number" name="isbn" id="isbn" class="form-item-center form-item-2" min="0" oninput="isDuplicateISBN(this.value, false)" required />
+                    <div class="validation-message form-item-right" id="isbn-validate"></div>
+                    <label for="authors" class="form-item-left form-item-3">Authors</label>
+                    <input type="text" name="authors" id="authors" size="50" class="form-item-center form-item-3" required />
+                    <div class="description-message form-item-right" id="author-instruction">*Use comma (,) to separate between multiple authors</div>
+                    <label for="noOfCopies" class="form-item-left form-item-4">No. of Copies</label>
+                    <input type="number" name="noOfCopies" id="noOfCopies" min="0" class="form-item-center form-item-4" required />
+                    <div class="form-item-center-to-right form-item-5">
+                        <input type="submit" value="Add" id="submit-add" />
+                        <input type="reset" value="Clear" id="reset-add" />
+                    </div>
+                </form>
+            </div>
+        </div>
+        <footer class="topic uni-name-footer">
+            <a href="/">University of PontyBridge Library System</a>
+        </footer>
+    </body>
+</html>

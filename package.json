@@ -1,0 +1,27 @@
+{
+    "name": "cmt112-coursework2",
+    "version": "1.0.0",
+    "description": "Server for Coursework 2 for CMT112",
+    "main": "server.js",
+    "scripts": {
+        "start": "node app.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": ""
+    },
+    "author": "",
+    "license": "MIT",
+    "dependencies": {
+        "body-parser": "^1.19.0",
+        "cors": "^2.8.5",
+        "express": "^4.16.4",
+        "http-errors": "^1.7.1",
+        "method-override": "^3.0.0",
+        "node-fetch": "^2.6.0",
+        "sequelize": "^4.44.3",
+        "sqlite3": "^4.0.7",
+        "templatesjs": "^2.0.0"
+    },
+    "devDependencies": {}
+}

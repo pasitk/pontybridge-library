@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>University of PontyBridge : Library System</title>
+        <link rel="stylesheet" href="/css/style.css">
+        <link href="https://fonts.googleapis.com/css?family=Quattrocento+Sans&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Quattrocento&display=swap" rel="stylesheet">
+        <script defer src="/js/layout.js"></script>
+        <script src="/js/jquery-3.4.1.js"></script>
+    </head>
+    <body>
+        <header>
+        </header>
+        <div class="all-content">
+            <div class="system-message hidden" id="alert-box">      <!-- Area for Display System Message, like success or error notification -->
+                <div></div>
+            </div>
+            <div class="system-message greetings">                  <!-- Topic and instruction to interact with the page -->
+                <div class="welcome">Welcome to PontyBridge University Library System!</div>
+                <div class="instruction">Please select your service today.</div>
+            </div>
+            <div class="site-map">                                  <!-- Site map for navigation throughout the website -->
+                <div class="navigations">
+                    <div class="users">                                 <!-- Features about users -->
+                        <div class="nav-topic">Users</div>
+                        <ul class="nav-items">
+                            <li>
+                                <a href="/users/view-all">All users
+                                    <ul>
+                                        <li>Search</li>
+                                        <li>View Detail</li>
+                                        <li>Update Detail</li>
+                                        <li>Remove</li>
+                                    </ul>
+                                </a>
+                            </li>
+                            <li><a href="/users/add">Add</a></li>
+                        </ul>
+                    </div>
+                    <div class="books">                                  <!-- Features about books -->
+                        <div class="nav-topic">Books</div>
+                        <ul class="nav-items">
+                            <li>
+                                <a href="/books/view-all">All books
+                                    <ul>
+                                        <li>Search</li>
+                                        <li>View Detail</li>
+                                        <li>Update Detail</li>
+                                        <li>Remove</li>
+                                    </ul>
+                                </a>
+                            </li>
+                            <li><a href="/books/add">Add</a></li>
+                        </ul>
+                    </div>
+                    <div class="loans">                                 <!-- Features about loans -->
+                        <div class="nav-topic">Loan</div>
+                        <ul class="nav-items">
+                            <li>
+                                <a href="/loans/make-a-loan">Make a loan to user / Change due date of a loan</a>
+                            </li>
+                            <li>
+                                <a href="/loans/view-by-user">Get a user’s current loan list or loan history</a>
+                            </li>
+                            <li>
+                                <a href="/loans/view-by-book">Get user currently borrowing or borrowed a book</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="topic uni-name-footer">
+            <a href="/">University of PontyBridge Library System</a>
+        </footer>
+    </body>
+</html>

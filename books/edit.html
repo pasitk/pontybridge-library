@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>University of PontyBridge : Library System</title>
+        <link rel="stylesheet" href="/css/style.css">
+        <link href="https://fonts.googleapis.com/css?family=Quattrocento+Sans&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Quattrocento&display=swap" rel="stylesheet">
+        <script defer src="/js/layout.js"></script>
+        <script src="/js/datetime.js"></script>
+        <script src="/js/transaction.js"></script>
+        <script src="/js/jquery-3.4.1.js"></script>
+    </head>
+    <body>
+        <header>
+        </header>
+        <div class="all-content">
+            <div class="system-message hidden" id="alert-box">  <!-- Area for Display System Message, like success or error notification -->
+                <div></div>
+            </div>
+            <div class="system-message greetings">              <!-- Topic and instruction to interact with the page -->
+                <div class="welcome">Edit book's detail</div>
+                <div class="instruction">Please edit title, an ISBN number, number of copies, or select author(s)</div>
+            </div>
+            <div class="transaction">                           <!-- Form div : Editing book detail -->
+                <form class="simple-form" id="form-books-edit" method="POST" action="">
+                    <input type="hidden" name="_method" value="PUT">
+                    <input type="hidden" name="oldIsbn" id="oldIsbn" value="">
+                    <label for="title" class="form-item-left form-item-1">Title</label>
+                    <input type="text" name="title" id="title" size="50" class="form-item-center-to-right form-item-1" required />
+                    <label for="isbn" class="form-item-left form-item-2">ISBN</label>
+                    <input type="number" name="isbn" id="isbn" class="form-item-center form-item-2" min="0" oninput="isDuplicateISBN(this.value, true)" required />
+                    <div class="validation-message form-item-right" id="isbn-validate"></div>
+                    <label for="authors" class="form-item-left form-item-3">Authors</label>
+                    <input type="text" name="authors" id="authors" size="50" class="form-item-center form-item-3" />
+                    <div class="description-message form-item-right" id="author-instruction">*Use comma (,) to separate between multiple authors</div>
+                    <label for="noOfCopies" class="form-item-left form-item-4">No. of Copies</label>
+                    <input type="number" name="noOfCopies" id="noOfCopies" class="form-item-center form-item-4" min="0" required />
+                    <div class="created-and-updated form-item-center-to-right form-item-5">
+                        <div id="created">Created at : </div>
+                        <div id="updated">Updated at : </div>
+                    </div>
+                    <div class="form-item-center-to-right form-item-6">
+                        <input type="submit" value="Save" id="submit-edit" />
+                        <input type="reset" onclick="getBookDetail('form-books-edit',setupEditBookDetailForm,setupEditBookDetailFormErrorCase)" value="Reset" id="reset-edit" />
+                        <input type="button" onclick="backToLatestPageBefore()" value="Back" id="back-edit" />
+                    </div>
+                </form>
+                <script>getBookDetail('form-books-edit',setupEditBookDetailForm,setupEditBookDetailFormErrorCase)</script>  <!-- Script to preload book's current data to be ready for editing and put it into the form -->
+            </div>
+        </div>
+        <footer class="topic uni-name-footer">
+            <a href="/">University of PontyBridge Library System</a>
+        </footer>
+    </body>
+</html>

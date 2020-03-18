@@ -1,0 +1,116 @@
+<!-- Header part : should be included in every pages of the website  -->
+<div class="mobile-header">                     <!-- Header for Mobile Site  -->
+    <div class="uni-name-mobile topic">
+        <a href="/">
+            <span class="uni-name-smallest">University of PontyBridge</span><br/>
+            <span class="uni-name-smaller">Library System</span>
+        </a>
+    </div>
+    <div class="main-menu" id="menu-btn">       <!-- Dropdown Menu with Hamburger Button  -->
+        <!--
+        *   CSS Hamburger fold-out menu (HTML Part)
+        *   This code was adapted from CodePen post by Erik Terwan
+        *   accessed 23-10-2019
+        *   https://codepen.io/erikterwan/pen/EVzeRP
+        *   Change <span> to <div>
+        -->
+        <div id="menu-toggle">                  <!-- Hamburger Button, created by 3 div in vertical line -->
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <!--
+        *   Checkbox for toggle open/close dropdown menu (HTML Part)
+        *   This code has written by myself, but inspired by Chris Coyier's content at css-tricks.com
+        *   accessed 23-10-2019
+        *   https://css-tricks.com/the-checkbox-hack/
+        -->
+        <label for="btn-toggle" id="label-btn-toggle">Open or Close Menu</label>    <!-- hidden label, just for accessibility -->
+        <input type="checkbox" id="btn-toggle"> <!-- Checkbox with opacity = 0, to open/close dropdown menu by css selector -->
+        <!--
+        *   Dropdown menu for mobile site (HTML Part)
+        *   This code was adapted from w3schools.com by apply classes in this site
+        *   accessed 23-10-2019
+        *   https://www.w3schools.com/css/tryit.asp?filename=trycss_dropdown_button
+        -->
+        <div class="menu-dropdown-items">       <!-- Dropdown menu -->
+            <div class="main-menu-item-mobile" id="menu-mobile-users">
+                <div>Users</div>
+                <div class="arrow">▼</div>
+            </div>
+            <div class="sub-menu-items" id="sub-menu-mobile-users">
+                <a href="/users/view-all">All users
+                    <ul>
+                        <li>Search</li>
+                        <li>Remove</li>
+                        <li>View Detail</li>
+                        <li>Update Detail</li>
+                    </ul>
+                </a>
+                <a href="/users/add">Add</a>
+            </div>
+            <div class="main-menu-item-mobile" id="menu-mobile-books">
+                <div>Books</div>
+                <div class="arrow">▼</div>
+            </div>
+            <div class="sub-menu-items" id="sub-menu-mobile-books">
+                <a href="/books/view-all">All books
+                    <ul>
+                        <li>Search</li>
+                        <li>Remove</li>
+                        <li>View Detail</li>
+                        <li>Update Detail</li>
+                    </ul>
+                </a>
+                <a href="/books/add">Add</a>
+            </div>
+            <div class="main-menu-item-mobile" id="menu-mobile-loans">
+                <div>Loans</div>
+                <div class="arrow">▼</div>
+            </div>
+            <div class="sub-menu-items" id="sub-menu-mobile-loans">
+                    <a href="/loans/make-a-loan">Make a loan to user / Change due date of a loan</a>
+                    <a href="/loans/view-by-user">Get a user’s current loan list or loan history</a>
+                    <a href="/loans/view-by-book">Get user currently borrowing or borrowed a book</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="desktop-header">                    <!-- Header for Desktop Site  -->
+    <div class="uni-name topic">
+        <a href="/">University of PontyBridge<br />Library System</a>
+    </div>
+    <div class="main-menu">
+        <div class="main-menu-item" id="main-menu-users">Users <span class="arrow">▼</span></div>
+        <div class="menu-dropdown-items menu-dropdown-items-desktop" id="sub-menu-users">
+            <a href="/users/view-all">All users
+                <ul>
+                    <li>Search</li>
+                    <li>View Detail</li>
+                    <li>Update Detail</li>
+                    <li>Remove</li>
+                </ul>
+            </a>
+            <a href="/users/add">Add</a>
+        </div>
+        <div class="main-menu-item" id="main-menu-books">Books <span class="arrow">▼</span></div>
+        <div class="menu-dropdown-items menu-dropdown-items-desktop" id="sub-menu-books">
+            <a href="/books/view-all">All books
+                <ul>
+                    <li>Search</li>
+                    <li>Remove</li>
+                    <li>View Detail</li>
+                    <li>Update Detail</li>
+                </ul>
+            </a>
+            <a href="/books/add">Add</a>
+        </div>
+        <div class="main-menu-item" id="main-menu-loans">Loans <span class="arrow">▼</span></div>
+        <div class="menu-dropdown-items menu-dropdown-items-desktop" id="sub-menu-loans">
+            <a href="/loans/make-a-loan">Make a loan to user / Change due date of a loan</a>
+            <a href="/loans/view-by-user">Get a user’s current loan list or loan history</a>
+            <a href="/loans/view-by-book">Get user currently borrowing or borrowed a book</a>
+        </div>
+    </div>
+</div>
+<!-- End of header part  -->
