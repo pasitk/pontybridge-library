@@ -18,7 +18,7 @@
         "express": "^4.16.4",
         "http-errors": "^1.7.1",
         "method-override": "^3.0.0",
-        "node-fetch": "^2.6.0",
+        "node-fetch": "^2.6.1",
         "sequelize": "^4.44.3",
         "sqlite3": "^4.0.7",
         "templatesjs": "^2.0.0"
